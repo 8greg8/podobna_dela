@@ -1,0 +1,56 @@
+## Core latex auxilary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.sty
+*.bst
+*.cls
+
+## Archives
+*.tar
+*.tgz
+*.tar.gz
+*.zip
+*.7z
+
+## Images:
+*.jpg
+*.jpeg
+*.png
+*.gif
+
+## Other
+#*.pdf
+
+## Intermediate documents:
+*.dvi
+*.xdv
+*-converted-to.*
+*.ps
+*.eps
+
+## Bibliography auxilary files:
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+## Build tool auxilary files:
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+

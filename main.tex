@@ -1,0 +1,350 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[11pt,a4paper]{report}
+%\usepackage[a4paper, margin=20mm]{geometry}
+
+
+
+\usepackage[utf8]{inputenc} 
+%\usepackage[T1]{fontenc}
+%\usepackage[slovene]{babel}    % pravila za slovensko deljenje besed
+
+
+
+
+\usepackage{pdfpages}
+
+%\usepackage[numbers]{natbib}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% MATEMATIKA IN FIZIKA %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% za matematiko
+\usepackage{amsmath, amsfonts, xfrac, amssymb, mathrsfs, amsthm, bm, cuted}
+% za enote
+% \si{enota}
+% \SI{cifra}{enota}
+% \num{cifra}
+% \ang{kot}
+\usepackage{siunitx}
+% Declare new unit
+\DeclareSIUnit{\cal}{cal}
+\DeclareSIUnit{\kcal}{\kilo\cal}
+\DeclareSIUnit{\joul}{\J}
+\DeclareSIUnit{\kjoul}{\kJ}
+\DeclareSIUnit{\min}{\minute}
+%\sisetup{output-decimal-marker = {,}}
+\sisetup{separate-uncertainty=true,multi-part-units=single}
+\sisetup{range-phrase = --}
+%\sisetup{per-mode=reciprocal}
+%\sisetup{group-separator = {.}}
+% za uporabljanje decimalne vejice in ne pike
+% pises decimalno piko, vendar ti zgenerira kot decimalno vejico
+% to zato, da ko uporabljas vejico imas za vejico avtomatsko presledek
+%\DeclareMathSymbol{.}{\mathord}{letters}{"3B}
+% lahko bi uporabil tudi novo komando
+\newcommand{\vejica}{{,}}
+% lahko pa uporabljas \num{stevilka}, iz paketa siunitx
+
+% za (1-3) pri enačbah
+%\usepackage{cleveref}
+\usepackage{eurosym}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABELE IN SLIKE NASTEVANJE %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% for adding tables that can span across multiple columns
+\usepackage{xtab}
+% za uporabo toprule bottomrule midrule za boljse tabele
+\usepackage{booktabs} 
+\usepackage[]{multirow}
+% za align-annje na decimalni vejici
+\usepackage{dcolumn}
+% USAGE: ...\begin{tabular}{l r c D{separator in tex file}{ separator in output}{decimal places}}
+% ovveride in heading with \multicolumn{1}{..}{..}
+
+% za tabele katerim dolocimo širino in X specifier -> ta naredi stolpec tako
+% dolg, da bo tabela zavzela določeno širino.
+\usepackage{tabularx}
+% ovveride in heading with \multicolumn{1}{..}{..}
+\usepackage{etoolbox}
+%\robustify\bfseries
+\usepackage{longtable}
+
+% za dodajanje slik
+\usepackage{graphicx}
+\graphicspath{{./pics/}}
+\usepackage{epstopdf}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Za dodajanje okvirjev okoli slik
+\usepackage[export]{adjustbox}
+% USAGE: 
+% \includegraphics[<other options>, frame]{image}
+% or
+% \includegraphics[<other options>, fbox]{image}
+
+% za tikz slikce
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepgfplotslibrary{polar}
+\pgfplotsset{plot style/.style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+
+\pgfplotsset{polar plot style/.style = {
+xticklabels={,,
+$\frac{\pi}{6}$, $\frac{\pi}{3}$, $\frac{\pi}{2}$, $\frac{2\pi}{3}$,
+$\frac{5\pi}{6}$, $\pi$, $\frac{7\pi}{6}$, $\frac{4\pi}{3}$,
+$\frac{3\pi}{2}$, $\frac{5\pi}{3}$,$\frac{11\pi}{6}$,}, thick
+}}
+
+\pgfplotsset{hoof plot style/.style = {
+polar plot style,
+xtick={0,30,60,90,120,150,180,210,240,270,300,330},
+xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
+}}
+
+\usepackage{circuitikz, tikz, tikz-3dplot}
+\usetikzlibrary{arrows, shapes, positioning, intersections, calc, shadings}
+\usetikzlibrary{3d}
+\newcommand{\blokec}[2]{node[draw, text centered, minimum width=4cm, minimum height=1cm, rounded corners, text width= 3cm, scale=1](#1){#2}}
+    
+\tikzset{dash/.style = {dashed, draw=black!50}}
+\tikzset{dot/.style = {dotted, draw=black!50}}
+\tikzset{base-axis/.style = {very thick}}
+\tikzset{axis/.style = {base-axis, ->, >=stealth}}
+\tikzset{plane/.style = {
+	fill=teal!20, opacity=0.8,
+    draw=teal!50!black!50,
+    solid, thick
+    }}
+      
+\tikzset{vec/.style = {->, >=stealth, solid, thick}}
+
+\tikzset{velocity/.style = { vec, draw=orange!50!black!90}}
+
+
+\tikzset{rect/.style = {
+  rectangle,
+  very thick, solid, rounded corners=1mm,
+  top color=white,
+  text centered, align=center,
+  scale = 0.7
+  }}
+  \tikzset{title/.style = {
+  % Rectangle:
+  rect,
+  draw=red!50!black!50,
+  bottom color=red!50!black!20,
+  % Text:
+  text width = 30mm
+  }}
+  \tikzset{block/.style = {
+  % Rectangle:
+  rect,
+  draw=black!50,
+  bottom color=black!20
+  % Text
+  }}
+  \tikzset{input/.style = {
+  % Rectangle:
+  block,
+  draw=green!50!black!50,
+  bottom color=green!50!black!20
+  % Text
+  }}
+  \tikzset{output/.style = {
+  % Rectangle:
+  block,
+  draw=orange!50!black!50,
+  bottom color=orange!50!black!20
+  % Text
+  }}
+  \tikzset{background/.style = {
+  fill=black!10, 
+  rounded corners, 
+  draw=black!50, 
+  dashed
+  }}
+  \tikzset{arrow/.style = {
+  ->,
+  >=stealth,
+  shorten >= 1mm,
+  shorten <= 1mm,
+  very thick,
+  draw=black!50,
+  line width = 1mm
+  }}
+  \tikzset{angle/.style={
+	fill=#1!20, opacity=0.8,
+	draw=#1!50!black!50
+	}}
+  \tikzset{zxplane/.style={canvas is zx plane at y=#1}}
+  \tikzset{yxplane/.style={canvas is yx plane at z=#1}}
+  \newcommand{\spherical}[3]{xyz spherical cs:radius=#1,longitude=#3,latitude=#2}
+  \newcommand{\cylindrical}[3]{xyz cylindrical cs:radius=#1,z=#3,angle=#2}
+  
+
+% za odštevanje pri listih
+%\usepackage[start=7]{etaremune}
+% za seznam kjer lahko spreminjaš številke
+% dodati moraš [label = nekaj]
+% če hočeš številke dodaš \arabic*
+% če hočeš črke dodaš \alph* ali \Alph*
+% če hočeš rimske številke dodaš \roman* ali \Roman*
+\usepackage{enumitem}
+% za listo v dveh stolpcih
+\usepackage{multicol}
+% za dodajanje besedila iz drugih datotek
+\usepackage{verbatim}
+% za urlje 
+%\usepackage[unicode, hidelinks]{hyperref}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\usepackage{bookmark}
+\usepackage{fancyhdr}
+
+
+%\usepackage[style=ieee]{biblatex}
+%%%%%%%%%%%%%%%%
+% NOVE KOMANDE %
+%%%%%%%%%%%%%%%%
+\usepackage{xspace} % da latex dojame da mora dat presledke med komandami
+\newcommand{\stopinj}{^\circ}
+\newcommand{\sintaksa}[1]{\xspace``\texttt{#1}''\xspace}
+\newcommand{\modd}{\uppercase{modd}\xspace}
+\newcommand{\opencv}{OpenCV\xspace}
+
+
+\newcommand{{\T}}{\ensuremath{^{\top}}}
+\newcommand{\Mu}{M}
+\renewcommand{\Xi}{X}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\renewcommand{\vec}[1]{{\ensuremath{\boldsymbol{#1}}\xspace}}
+
+\newcommand{\esvr}{\ensuremath{\epsilon}-SVR\xspace}
+\newcommand{\nusvr}{\ensuremath{\nu}-SVR\xspace}
+
+\newcommand{\corr}{{CORR}\xspace}
+\newcommand{\rmse}{{RMSE}\xspace}
+\newcommand{\rae}{{RAE}\xspace}
+\newcommand{\rrse}{{RRSE}\xspace}
+
+\newcommand{\proc}[1]{\SI{#1}{\%}\xspace}
+
+\newcommand{\boldentry}[3]{%
+  \multicolumn{1}{S[table-format=#1.#2,
+				  	round-mode=places, round-precision=#2,
+                    mode=text,
+                    text-rm=\fontseries{b}\selectfont
+                   ]}{#3}}
+\newcommand{\thead}[1]{\multicolumn{1}{c}{\textbf{#1}}}
+\newcommand{\theadc}[1]{\multicolumn{2}{c}{\textbf{#1}}}
+\newcommand{\theadm}[1]{\thead{\ensuremath{\mathbf{#1}}}}
+\newcommand{\tdata}[1]{\input{./tab/#1.tex}}
+
+\newcommand{\rnum}[1]{\romannumeral #1 \xspace}
+\newcommand{\Rnum}[1]{\MakeUppercase{\rnum{#1}}}
+
+\newcommand{\folder}{./section}
+
+\let\originalcite\cite
+\renewcommand{\cite}[1]{\unskip~\originalcite{#1}}
+\let\originalref\ref
+\renewcommand{\ref}[1]{\unskip~\originalref{#1}}
+
+\usepackage{thmtools}
+\declaretheoremstyle[
+spaceabove=6pt, spacebelow=6pt,
+headfont=\normalfont\bfseries,
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont,
+postheadspace=0.6em,
+headpunct=:
+]{mystyle}
+\declaretheorem[style=mystyle, name=Hipoteza, preheadhook={\renewcommand{\thehyp}{H\textsubscript{\arabic{hyp}}}}]{hyp}
+
+
+
+
+
+
+%\usepackage{vmargin}
+%\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Related work}                             % Title
+\author{Gregor Koporec, mag. inž. el.}                               % Author
+\date{\today}                                           % Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+
+\usepackage[backend=biber, style=ieee]{biblatex}
+\def\citea#1{\citeauthor*{#1} \cite{#1}\xspace}
+\addbibresource{./related.bib}
+\addbibresource{./dataset.bib}
+\addbibresource{./images.bib}
+\addbibresource{./other.bib}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+	\vspace*{0.2 cm}
+	\includegraphics[width = 0.5\columnwidth]{logo}\\[1.0 cm]   % University Logo
+	%\textsc{\LARGE Univerza v Ljubljani}\\[2.0 cm]   % University Name
+	%\textsc{\Large Course Code}\\[0.5 cm]               % Course Code
+	\textsc{\large PhD Thesis}\\[0.5 cm]               % Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[1.5 cm]
+	
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft} \large
+			\emph{Author:}\\
+			\theauthor
+		\end{flushleft}
+	\end{minipage}~
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushright} \large
+			\emph{Menthor:} \\
+			prof. dr. Janez Perš                                   % Your Student Number
+		\end{flushright}
+	\end{minipage}\\[2 cm]
+	
+	{\large \thedate}\\[2 cm]
+	
+	\vfill
+	
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+%\pagebreakGauss
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	%\thispagestyle{empty}
+	\input{\folder/primerjava.tex}
+	\input{\folder/izboljsanje.tex}
+	\input{\folder/bioloske_primerjave.tex}
+	\input{\folder/razpoznavanje_obrazov.tex}
+	\input{\folder/pristranskost.tex}
+	%\bibliographystyle{ieee}
+	%\bibliography{./related}
+	\printbibliography
+\end{document}
